@@ -1,9 +1,11 @@
-package com.silicus.librarymanagent.Service.User;
+package com.silicus.librarymanagent.ServiceImplementation;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class UserServiceImpl<T> implements UserService<T> {
+import com.silicus.librarymanagent.Service.BookService;
+
+public class BookServiceImpl<T> implements BookService<T> {
 
 	public T read(Serializable primaryKey) throws IllegalStateException, IllegalArgumentException {
 		// TODO Auto-generated method stub
@@ -33,6 +35,18 @@ public class UserServiceImpl<T> implements UserService<T> {
 	public long count() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public T findById(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public T findByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

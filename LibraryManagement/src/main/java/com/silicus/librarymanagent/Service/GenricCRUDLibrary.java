@@ -13,5 +13,7 @@ public interface GenricCRUDLibrary<T> {
     public List<T> findAll();
     public boolean delete(Long id);
     public long count();
+    public T findById(long id);
+    public T findByName(String name);
  
 }

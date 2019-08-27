@@ -1,4 +1,4 @@
-package com.silicus.librarymanagent.Service.Book;
+package com.silicus.librarymanagent.Service;
 
 import com.silicus.librarymanagent.Service.GenricCRUDLibrary;
 

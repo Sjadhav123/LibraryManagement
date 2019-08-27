@@ -1,9 +1,11 @@
-package com.silicus.librarymanagent.Service.BookReturnTracker;
+package com.silicus.librarymanagent.ServiceImplementation;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class BookReturnTrackerServiceImpl<T> implements BookReturnTrackerService<T> {
+import com.silicus.librarymanagent.Service.RoleService;
+
+public class RoleServiceImpl<T> implements RoleService<T> {
 
 	public T read(Serializable primaryKey) throws IllegalStateException, IllegalArgumentException {
 		// TODO Auto-generated method stub
@@ -33,6 +35,18 @@ public class BookReturnTrackerServiceImpl<T> implements BookReturnTrackerService
 	public long count() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public T findById(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public T findByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

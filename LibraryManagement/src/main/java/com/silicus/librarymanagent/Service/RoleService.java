@@ -1,4 +1,4 @@
-package com.silicus.librarymanagent.Service.Role;
+package com.silicus.librarymanagent.Service;
 
 import com.silicus.librarymanagent.Service.GenricCRUDLibrary;
 
