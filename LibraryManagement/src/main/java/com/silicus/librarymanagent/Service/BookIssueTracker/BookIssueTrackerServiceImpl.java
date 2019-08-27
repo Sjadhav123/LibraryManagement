@@ -7,11 +7,6 @@ public class BookIssueTrackerServiceImpl<T> implements BookIssueTrackerService<T
 
 	
 
-	@Override
-	public T pudate(T t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public T insert(T t) {
@@ -39,6 +34,12 @@ public class BookIssueTrackerServiceImpl<T> implements BookIssueTrackerService<T
 
 	@Override
 	public T read(Serializable primaryKey) throws IllegalStateException, IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public T pudate(T t) {
 		// TODO Auto-generated method stub
 		return null;
 	}
