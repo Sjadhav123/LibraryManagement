@@ -8,11 +8,7 @@ public class BookIssueTrackerServiceImpl<T> implements BookIssueTrackerService<T
 	
 
 
-	@Override
-	public boolean delete(Long id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 	@Override
 	public long count() {
@@ -42,6 +38,12 @@ public class BookIssueTrackerServiceImpl<T> implements BookIssueTrackerService<T
 	public List<T> findAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean delete(Long id) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 
