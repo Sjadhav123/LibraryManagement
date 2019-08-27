@@ -5,11 +5,7 @@ import java.util.List;
 
 public class BookIssueTrackerServiceImpl<T> implements BookIssueTrackerService<T> {
 
-	@Override
-	public T read(Serializable primaryKey) throws IllegalStateException, IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public T pudate(T t) {
@@ -39,6 +35,12 @@ public class BookIssueTrackerServiceImpl<T> implements BookIssueTrackerService<T
 	public long count() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public T read(Serializable primaryKey) throws IllegalStateException, IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
