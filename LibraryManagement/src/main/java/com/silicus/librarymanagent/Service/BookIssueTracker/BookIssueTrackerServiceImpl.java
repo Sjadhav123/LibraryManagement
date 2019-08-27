@@ -9,12 +9,6 @@ public class BookIssueTrackerServiceImpl<T> implements BookIssueTrackerService<T
 
 
 	@Override
-	public T insert(T t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<T> findAll() {
 		// TODO Auto-generated method stub
 		return null;
@@ -40,6 +34,12 @@ public class BookIssueTrackerServiceImpl<T> implements BookIssueTrackerService<T
 
 	@Override
 	public T pudate(T t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public T insert(T t) {
 		// TODO Auto-generated method stub
 		return null;
 	}
