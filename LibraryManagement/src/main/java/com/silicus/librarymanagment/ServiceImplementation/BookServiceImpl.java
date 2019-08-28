@@ -1,4 +1,4 @@
-package com.silicus.librarymanagent.ServiceImplementation;
+package com.silicus.librarymanagment.ServiceImplementation;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,7 +12,7 @@ public class BookServiceImpl<T> implements BookService<T> {
 		return null;
 	}
 
-	public T pudate(T t) {
+	public T update(T t) {
 		// TODO Auto-generated method stub
 		return null;
 	}

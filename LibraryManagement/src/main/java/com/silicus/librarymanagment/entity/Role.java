@@ -1,4 +1,4 @@
-package com.silicus.librarymanagent.entity;
+package com.silicus.librarymanagment.entity;
 
 public class Role {
 

@@ -1,18 +1,18 @@
-package com.silicus.librarymanagent.ServiceImplementation;
+package com.silicus.librarymanagment.ServiceImplementation;
 
 import java.io.Serializable;
 import java.util.List;
 
-import com.silicus.librarymanagent.Service.UserService;
+import com.silicus.librarymanagent.Service.BookReturnTrackerService;
 
-public class UserServiceImpl<T> implements UserService<T> {
+public class BookReturnTrackerServiceImpl<T> implements BookReturnTrackerService<T> {
 
 	public T read(Serializable primaryKey) throws IllegalStateException, IllegalArgumentException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public T pudate(T t) {
+	public T update(T t) {
 		// TODO Auto-generated method stub
 		return null;
 	}
