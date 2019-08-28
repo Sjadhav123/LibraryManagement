@@ -1,10 +1,16 @@
 package com.silicus.librarymanagment.entity;
 
-public class BookIssueTracker {
+import java.io.Serializable;
 
+public class BookIssueTracker implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private int bid;
-	private int uid;
+	private User user;
 	private String dateOfIssue;
 	private String expDate;
 	private String issuer;
@@ -20,11 +26,13 @@ public class BookIssueTracker {
 	public void setBid(int bid) {
 		this.bid = bid;
 	}
-	public int getUid() {
-		return uid;
+
+	
+	public User getUser() {
+		return user;
 	}
-	public void setUid(int uid) {
-		this.uid = uid;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public String getDateOfIssue() {
 		return dateOfIssue;
@@ -53,7 +61,7 @@ public class BookIssueTracker {
 		result = prime * result + ((expDate == null) ? 0 : expDate.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((issuer == null) ? 0 : issuer.hashCode());
-		result = prime * result + uid;
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 	@Override
@@ -84,12 +92,14 @@ public class BookIssueTracker {
 				return false;
 		} else if (!issuer.equals(other.issuer))
 			return false;
-		if (uid != other.uid)
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}
-	
-	
+
 	
 	
 }

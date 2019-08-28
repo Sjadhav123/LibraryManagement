@@ -1,11 +1,17 @@
 package com.silicus.librarymanagment.entity;
 
-public class BookReturnTracker {
+import java.io.Serializable;
 
+public class BookReturnTracker implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private int issueId;
 	private String returnDate;
-	private String receiver;
+	private User receiver;
 	private double fineAmount;
 	public int getId() {
 		return id;
@@ -25,11 +31,16 @@ public class BookReturnTracker {
 	public void setReturnDate(String returnDate) {
 		this.returnDate = returnDate;
 	}
-	public String getReceiver() {
+
+	
+	public User getReceiver() {
 		return receiver;
 	}
-	public void setReceiver(String receiver) {
+	public void setReceiver(User receiver) {
 		this.receiver = receiver;
+	}
+	public void setFineAmount(double fineAmount) {
+		this.fineAmount = fineAmount;
 	}
 	public double getFineAmount() {
 		return fineAmount;
@@ -77,6 +88,8 @@ public class BookReturnTracker {
 			return false;
 		return true;
 	}
+	
+	
 	
 	
 	
