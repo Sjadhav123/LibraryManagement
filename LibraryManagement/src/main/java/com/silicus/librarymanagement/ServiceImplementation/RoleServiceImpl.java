@@ -1,9 +1,9 @@
-package com.silicus.librarymanagment.ServiceImplementation;
+package com.silicus.librarymanagement.ServiceImplementation;
 
 import java.io.Serializable;
 import java.util.List;
 
-import com.silicus.librarymanagent.Service.RoleService;
+import com.silicus.librarymanagement.Service.RoleService;
 
 public class RoleServiceImpl<T> implements RoleService<T> {
 

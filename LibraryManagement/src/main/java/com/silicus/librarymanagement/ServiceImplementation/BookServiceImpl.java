@@ -1,11 +1,11 @@
-package com.silicus.librarymanagment.ServiceImplementation;
+package com.silicus.librarymanagement.ServiceImplementation;
 
 import java.io.Serializable;
 import java.util.List;
 
-import com.silicus.librarymanagent.Service.UserService;
+import com.silicus.librarymanagement.Service.BookService;
 
-public class UserServiceImpl<T> implements UserService<T> {
+public class BookServiceImpl<T> implements BookService<T> {
 
 	public T read(Serializable primaryKey) throws IllegalStateException, IllegalArgumentException {
 		// TODO Auto-generated method stub
