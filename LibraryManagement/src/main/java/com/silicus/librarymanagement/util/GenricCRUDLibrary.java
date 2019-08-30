@@ -3,17 +3,17 @@ package com.silicus.librarymanagement.util;
 /*Generic interface comman to all entities*/
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 public interface GenricCRUDLibrary<T> {
 
-	public T read(Serializable primaryKey) throws IllegalStateException,IllegalArgumentException;
-    public T update(T t);
-    public T insert(T t);
-    public List<T> findAll();
+    public T update(int id);
+    public void insert();
+    public Collection<T> findAll();
     public boolean delete(Long id);
     public long count();
-    public T findById(long id);
+    public Object findById(int id);
     public T findByName(String name);
  
 }

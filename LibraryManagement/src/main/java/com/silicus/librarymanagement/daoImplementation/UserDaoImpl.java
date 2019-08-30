@@ -1,28 +1,21 @@
 package com.silicus.librarymanagement.daoImplementation;
 
-import java.io.Serializable;
 import java.util.List;
 
 import com.silicus.librarymanagement.dao.UserDao;
 
 public class UserDaoImpl<T> implements UserDao<T> {
 
+	
 	@Override
-	public T read(Serializable primaryKey) throws IllegalStateException, IllegalArgumentException {
+	public T update(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public T update(T t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public T insert(T t) {
-		// TODO Auto-generated method stub
-		return null;
+	public void insert() {
+	
 	}
 
 	@Override
@@ -44,7 +37,7 @@ public class UserDaoImpl<T> implements UserDao<T> {
 	}
 
 	@Override
-	public T findById(long id) {
+	public T findById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -54,5 +47,7 @@ public class UserDaoImpl<T> implements UserDao<T> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

@@ -1,28 +1,22 @@
 package com.silicus.librarymanagement.daoImplementation;
 
-import java.io.Serializable;
 import java.util.List;
 
 import com.silicus.librarymanagement.dao.RoleDao;
 
 public class RoleDaoImpl<T> implements RoleDao<T> {
 
+	
 	@Override
-	public T read(Serializable primaryKey) throws IllegalStateException, IllegalArgumentException {
+	public T update(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public T update(T t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public T insert(T t) {
-		// TODO Auto-generated method stub
-		return null;
+	public void insert() {
+		
+		
 	}
 
 	@Override
@@ -44,7 +38,7 @@ public class RoleDaoImpl<T> implements RoleDao<T> {
 	}
 
 	@Override
-	public T findById(long id) {
+	public T findById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -55,4 +49,5 @@ public class RoleDaoImpl<T> implements RoleDao<T> {
 		return null;
 	}
 
+	
 }

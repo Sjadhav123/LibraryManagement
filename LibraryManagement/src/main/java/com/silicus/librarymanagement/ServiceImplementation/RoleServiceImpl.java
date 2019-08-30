@@ -1,31 +1,22 @@
 package com.silicus.librarymanagement.ServiceImplementation;
 
-import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import com.silicus.librarymanagement.Service.RoleService;
 
 public class RoleServiceImpl<T> implements RoleService<T> {
 
-	public T read(Serializable primaryKey) throws IllegalStateException, IllegalArgumentException {
+
+	public T update(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public T update(T t) {
-		// TODO Auto-generated method stub
-		return null;
+	public void insert() {
+	
 	}
 
-	public T insert(T t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	public List<T> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public boolean delete(Long id) {
 		// TODO Auto-generated method stub
@@ -38,13 +29,19 @@ public class RoleServiceImpl<T> implements RoleService<T> {
 	}
 
 	@Override
-	public T findById(long id) {
+	public T findById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public T findByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<T> findAll() throws IllegalStateException, IllegalArgumentException {
 		// TODO Auto-generated method stub
 		return null;
 	}

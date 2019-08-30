@@ -1,32 +1,24 @@
 package com.silicus.librarymanagement.daoImplementation;
 
-import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 
 import com.silicus.librarymanagement.dao.BookReturnDao;
 
 public class BookReturnDaoImpl<T> implements BookReturnDao<T> {
 
 	@Override
-	public T read(Serializable primaryKey) throws IllegalStateException, IllegalArgumentException {
+	public T update(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public T update(T t) {
-		// TODO Auto-generated method stub
-		return null;
+	public void insert() {
+
 	}
 
 	@Override
-	public T insert(T t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<T> findAll() {
+	public Collection<T> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -44,7 +36,7 @@ public class BookReturnDaoImpl<T> implements BookReturnDao<T> {
 	}
 
 	@Override
-	public T findById(long id) {
+	public T findById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

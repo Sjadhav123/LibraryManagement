@@ -1,7 +1,6 @@
 package com.silicus.librarymanagement.ServiceImplementation;
 
-import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 
 import com.silicus.librarymanagement.Service.BookIssueTrackerService;
 
@@ -14,26 +13,19 @@ public class BookIssueTrackerServiceImpl<T> implements BookIssueTrackerService<T
 		return 0;
 	}
 
+
 	@Override
-	public T read(Serializable primaryKey) throws IllegalStateException, IllegalArgumentException {
+	public T update(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public T update(T t) {
-		// TODO Auto-generated method stub
-		return null;
+	public void insert() {
 	}
 
 	@Override
-	public T insert(T t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<T> findAll() {
+	public Collection<T> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -45,7 +37,7 @@ public class BookIssueTrackerServiceImpl<T> implements BookIssueTrackerService<T
 	}
 
 	@Override
-	public T findById(long id) {
+	public T findById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -56,5 +48,7 @@ public class BookIssueTrackerServiceImpl<T> implements BookIssueTrackerService<T
 		return null;
 	}
 
+
+	
 
 }
