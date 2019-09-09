@@ -15,18 +15,43 @@ import com.silicus.librarymanagment.entity.Book;
 
 public class BookDaoImpl<T> implements BookDao<T> {
 
+	private Set<Book>bookset=new LinkedHashSet<>();
+	
+	
+	public BookDaoImpl() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+
+
 	@Override
 	public Set<T> findAll() throws IllegalStateException, IllegalArgumentException {
-		HashSet<Book> hsOutput = new LinkedHashSet<Book>();
+		HashSet<Book> hsOutput=null;
+		boolean cont=true;
 		try {
-			FileInputStream fileInputStream = new FileInputStream("D:\\\\FileOperationsPractice.txt");
+			FileInputStream fileInputStream = new FileInputStream("D:\\FileOperationsPractice11111.txt");
 			ObjectInputStream inputStream = new ObjectInputStream(fileInputStream);
-			hsOutput = (LinkedHashSet<Book>) inputStream.readObject();
+			  hsOutput = new LinkedHashSet<Book>();
+			  while(cont){
+                  Object obj=null;
+                try {
+                    obj = inputStream.readObject();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                  if(obj != null)
+                	  hsOutput.add((Book) obj);
+                  else
+                     cont = false;
+               }
+			//hsOutput = (LinkedHashSet<Book>) inputStream.readObject();
 			System.out.println(hsOutput.toString());
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		return (Set<T>) hsOutput;
+		
 
 	}
 
@@ -67,40 +92,16 @@ public class BookDaoImpl<T> implements BookDao<T> {
 	}
 
 	@Override
-	public void insert() {
-		Book book1 = new Book();
-		book1.setAuthor("Sachin Jadhav");
-		book1.setAvailable(Boolean.TRUE);
-		book1.setISBN("abcd1234");
-		book1.setName("Basic Java Concepts");
-		book1.setRackName("A1");
-		book1.setId(1);
+	public T insert(T t) throws IOException,FileNotFoundException {
+		
+		Book b=(Book)t;
+		 bookset.add(b);
+           System.out.println(bookset.toString());
+			return (T) bookset;
 
-		Book book2 = new Book();
-		book2.setAuthor("Sagar Sarawade");
-		book2.setAvailable(Boolean.TRUE);
-		book2.setISBN("abcd12345");
-		book2.setName("Head First Java");
-		book2.setRackName("A2");
-		book2.setId(2);
-
-		HashSet<Book> hs = new LinkedHashSet<Book>();
-		hs.add(book1);
-		hs.add(book2);
-
-		try {
-			FileOutputStream outputStream = new FileOutputStream("D:\\FileOperationsPractice.txt");
-			ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-			objectOutputStream.writeObject(hs);
-			objectOutputStream.close();
-			System.out.println("Objects have been successfully written to file");
-		} catch (FileNotFoundException fne) {
-			System.out.println(fne);
-		} catch (IOException ioe) {
-			System.out.println(ioe);
-		}
-
+	
 	}
+
 
 	@Override
 	public boolean delete(Long id) {

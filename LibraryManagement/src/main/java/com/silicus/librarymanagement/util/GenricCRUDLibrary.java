@@ -1,15 +1,13 @@
 package com.silicus.librarymanagement.util;
 
-/*Generic interface comman to all entities*/
-
-import java.io.Serializable;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
 
 public interface GenricCRUDLibrary<T> {
 
     public T update(int id);
-    public void insert();
+    public T insert(T t) throws IOException, FileNotFoundException;
     public Collection<T> findAll();
     public boolean delete(Long id);
     public long count();

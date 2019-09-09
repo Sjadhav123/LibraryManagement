@@ -12,11 +12,12 @@ public class RoleServiceImpl<T> implements RoleService<T> {
 		return null;
 	}
 
-	public void insert() {
-	
+	@Override
+	public T insert(T t) {
+		return t;
+		// TODO Auto-generated method stub
+		
 	}
-
-
 
 	public boolean delete(Long id) {
 		// TODO Auto-generated method stub

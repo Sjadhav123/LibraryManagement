@@ -12,10 +12,12 @@ public class BookReturnTrackerServiceImpl<T> implements BookReturnTrackerService
 		return null;
 	}
 
-	public void insert() {
+	@Override
+	public T insert(T t) {
+		return t;
+		// TODO Auto-generated method stub
 		
 	}
-
 	public List<T> findAll() {
 		// TODO Auto-generated method stub
 		return null;

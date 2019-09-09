@@ -13,11 +13,12 @@ public class UserServiceImpl<T> implements UserService<T> {
 		return null;
 	}
 
-	public void insert() {
-		
+	@Override
+	public T insert(T t) {
+		return t;
+		// TODO Auto-generated method stub
 		
 	}
-
 	public Collection<T> findAll() {
 		// TODO Auto-generated method stub
 		return null;

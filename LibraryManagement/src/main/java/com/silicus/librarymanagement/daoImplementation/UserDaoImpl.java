@@ -14,10 +14,11 @@ public class UserDaoImpl<T> implements UserDao<T> {
 	}
 
 	@Override
-	public void insert() {
-	
+	public T insert(T t) {
+		return t;
+		// TODO Auto-generated method stub
+		
 	}
-
 	@Override
 	public List<T> findAll() {
 		// TODO Auto-generated method stub

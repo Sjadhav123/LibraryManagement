@@ -15,7 +15,8 @@ public class BookIssueTrackerDaoImpl<T> implements BookIssueTrackerDao<T> {
 	}
 
 	@Override
-	public void insert() {
+	public T insert(T t) {
+		return t;
 		// TODO Auto-generated method stub
 		
 	}

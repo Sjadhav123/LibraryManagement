@@ -21,9 +21,11 @@ public class BookIssueTrackerServiceImpl<T> implements BookIssueTrackerService<T
 	}
 
 	@Override
-	public void insert() {
+	public T insert(T t) {
+		return t;
+		// TODO Auto-generated method stub
+		
 	}
-
 	@Override
 	public Collection<T> findAll() {
 		// TODO Auto-generated method stub

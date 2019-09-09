@@ -1,5 +1,6 @@
 package com.silicus.librarymanagement.ServiceImplementation;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -26,10 +27,15 @@ public class BookServiceImpl<T> implements BookService<T> {
 		
 	}
 
-	public void insert() {
+	public T insert(T t) {
 		
 	BookDaoImpl<Book>bookDaoImpl=new BookDaoImpl<Book>();
-	bookDaoImpl.insert();
+	try {
+		bookDaoImpl.insert((Book) t);
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+	return t;
 	
 		
 	}
