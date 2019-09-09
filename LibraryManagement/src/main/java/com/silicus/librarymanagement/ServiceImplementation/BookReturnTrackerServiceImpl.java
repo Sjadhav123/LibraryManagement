@@ -1,5 +1,8 @@
 package com.silicus.librarymanagement.ServiceImplementation;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
 import com.silicus.librarymanagement.Service.BookReturnTrackerService;
@@ -12,12 +15,7 @@ public class BookReturnTrackerServiceImpl<T> implements BookReturnTrackerService
 		return null;
 	}
 
-	@Override
-	public T insert(T t) {
-		return t;
-		// TODO Auto-generated method stub
-		
-	}
+	
 	public List<T> findAll() {
 		// TODO Auto-generated method stub
 		return null;
@@ -43,6 +41,16 @@ public class BookReturnTrackerServiceImpl<T> implements BookReturnTrackerService
 	public T findByName(String name) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+
+
+	@Override
+	public void insert(Collection<T> t) throws IOException, FileNotFoundException {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

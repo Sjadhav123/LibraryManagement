@@ -1,13 +1,17 @@
 package com.silicus.librarymanagement.daoImplementation;
 
+import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.Scanner;
 import java.util.Set;
 
 import com.silicus.librarymanagement.dao.BookDao;
@@ -15,97 +19,68 @@ import com.silicus.librarymanagment.entity.Book;
 
 public class BookDaoImpl<T> implements BookDao<T> {
 
-	private Set<Book>bookset=new LinkedHashSet<>();
-	
-	
+	private Set<Book> bookset = new LinkedHashSet<>();
+
 	public BookDaoImpl() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-
 
 	@Override
-	public Set<T> findAll() throws IllegalStateException, IllegalArgumentException {
-		HashSet<Book> hsOutput=null;
-		boolean cont=true;
-		try {
-			FileInputStream fileInputStream = new FileInputStream("D:\\FileOperationsPractice11111.txt");
-			ObjectInputStream inputStream = new ObjectInputStream(fileInputStream);
-			  hsOutput = new LinkedHashSet<Book>();
-			  while(cont){
-                  Object obj=null;
-                try {
-                    obj = inputStream.readObject();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-                  if(obj != null)
-                	  hsOutput.add((Book) obj);
-                  else
-                     cont = false;
-               }
-			//hsOutput = (LinkedHashSet<Book>) inputStream.readObject();
-			System.out.println(hsOutput.toString());
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return (Set<T>) hsOutput;
-		
+	public Set<T> findAll()
+			throws IllegalStateException, IllegalArgumentException, ClassNotFoundException, IOException {
+		LinkedHashSet<Book> allBooks = getExistingObjects();
+		return (Set<T>) allBooks;
 
 	}
 
 	@Override
-	public T update(int id) {
-		HashSet<Book> bookset = (HashSet<Book>)findAll();
-        Book bookObject = null;
-		
-		for(Book book:bookset) {
-			if(book.getId()==id) {
-				bookObject=book;
+	public T update(int id) throws FileNotFoundException, ClassNotFoundException, IOException {
+
+		LinkedHashSet<Book> bookSet = null;
+		try {
+			bookSet = getExistingObjects();
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		for (Book book : bookSet) {
+			if (book.getId() == id) {
+				book.setName("updatedBookName");
+				book.setAuthor("updateBookAuthor");
+				bookSet.add(book);
 				break;
 			}
 		}
-		
-        bookObject.setId(1);
-		bookObject.setAuthor("newAuthorname");
-		bookObject.setAvailable(Boolean.FALSE);
-		bookObject.setName("Durga Book");
-		bookObject.setISBN("qqqq222");
-		bookObject.setName("UpdatedBookName");
-		bookObject.setRackName("aa22");
-		bookset.add(bookObject);
+		System.out.println("BookSet after update Operation:" + bookSet.toString());
+		insert((Collection<T>) bookSet);
+		return null;
+	}
+
+	@Override
+	public boolean delete(Long id) throws IOException {
+
+		LinkedHashSet<Book> bookSet = null;
 		try {
-			FileOutputStream outputStream = new FileOutputStream("D:\\FileOperationsPractice.txt");
-			ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-			objectOutputStream.writeObject(bookset);
-			objectOutputStream.close();
-			System.out.println("Object have been successfully updated to file");
-		} catch (FileNotFoundException fne) {
-			System.out.println(fne);
-		} catch (IOException ioe) {
-			System.out.println(ioe);
+			bookSet = getExistingObjects();
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
-		return null;
+		for (Book book : bookSet) {
+			if (book.getId() == id) {
+				bookSet.remove(book);
+				System.out.println("Book successfully deleted");
+				break;
+			}
+		}
+		System.out.println("Bookset after deletion:" + bookSet.size());
+		File file = new File("D:\\FileOperationsPractice123456.txt");
+		FileOutputStream outputStream = new FileOutputStream(file);
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+		objectOutputStream.writeObject(bookSet);
 
-	}
-
-	@Override
-	public T insert(T t) throws IOException,FileNotFoundException {
-		
-		Book b=(Book)t;
-		 bookset.add(b);
-           System.out.println(bookset.toString());
-			return (T) bookset;
-
-	
-	}
-
-
-	@Override
-	public boolean delete(Long id) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -117,25 +92,25 @@ public class BookDaoImpl<T> implements BookDao<T> {
 
 	@Override
 	public Object findById(int id) {
-		
-		Book returnBook=null;
+
+		Book returnBook = null;
 		HashSet<Book> hsOutput = new LinkedHashSet<Book>();
 		try {
 			FileInputStream fileInputStream = new FileInputStream("D:\\\\FileOperationsPractice.txt");
 			ObjectInputStream inputStream = new ObjectInputStream(fileInputStream);
 			hsOutput = (LinkedHashSet<Book>) inputStream.readObject();
-			
-			for(Book book:hsOutput) {
-				if(book.getId()==id) {
-					returnBook=book;
+
+			for (Book book : hsOutput) {
+				if (book.getId() == id) {
+					returnBook = book;
 					break;
 				}
 			}
-			
+
 		} catch (Exception e) {
-			
+
 		}
-		
+
 		return returnBook;
 	}
 
@@ -143,6 +118,60 @@ public class BookDaoImpl<T> implements BookDao<T> {
 	public T findByName(String name) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void insert(Collection<T> t) throws IOException, FileNotFoundException, ClassNotFoundException {
+		System.out.println("IN INSERT :::::::::BOOKSET AFTER UPDATE OPERATION" + t.toString());
+		File file = new File("D:\\FileOperationsPractice123456.txt");
+		LinkedHashSet<Book> existingHashset = getExistingObjects();
+		FileOutputStream outputStream = new FileOutputStream(file);
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+		System.out.println("new books" + t.size());
+		bookset = (Set<Book>) t;
+		System.out.println("Bookset After update operation in insert:" + bookset.toString());
+		if (existingHashset != null) {
+			System.out.println("existing books:" + existingHashset.size());
+			System.out.println("existing books:" + existingHashset.toString());
+			existingHashset.addAll(bookset);
+			System.out.println(
+					"Bookset After adding bookset to existing hashset in insert:" + existingHashset.toString());
+
+		} else {
+			System.out.println("existing books:" + 0);
+			existingHashset = (LinkedHashSet<Book>) t;
+		}
+		System.out.println("Updated Bookset to write to file:");
+		objectOutputStream.writeObject(existingHashset);
+		objectOutputStream.close();
+		System.out.println("Objects have been successfully written to file");
+		System.out.println("Total books:" + existingHashset.size());
+		System.out.println("Total books are:" + getExistingObjects());
+
+	}
+
+	public LinkedHashSet<Book> getExistingObjects() throws IOException, ClassNotFoundException {
+		LinkedHashSet<Book> bookset = null;
+		ObjectInputStream input = null;
+		File file = new File("D:\\FileOperationsPractice123456.txt");
+		try {
+
+			if (file.exists()) {
+				FileInputStream fis = new FileInputStream(file);
+
+				input = new ObjectInputStream(fis);
+				bookset = (LinkedHashSet<Book>) input.readObject();
+			}
+		} catch (EOFException e) {
+			e.printStackTrace();
+		} finally {
+			if (file.exists()) {
+				input.close();
+			}
+		}
+		System.out.println("All books:" + bookset);
+		return bookset;
+
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.silicus.librarymanagement.daoImplementation;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Collection;
 
 import com.silicus.librarymanagement.dao.BookIssueTrackerDao;
@@ -14,13 +16,7 @@ public class BookIssueTrackerDaoImpl<T> implements BookIssueTrackerDao<T> {
 		return null;
 	}
 
-	@Override
-	public T insert(T t) {
-		return t;
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public Collection<T> findAll() {
 		// TODO Auto-generated method stub
@@ -49,6 +45,12 @@ public class BookIssueTrackerDaoImpl<T> implements BookIssueTrackerDao<T> {
 	public T findByName(String name) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void insert(Collection<T> t) throws IOException, FileNotFoundException {
+		// TODO Auto-generated method stub
+		
 	}
 
 

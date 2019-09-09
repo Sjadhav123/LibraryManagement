@@ -1,5 +1,7 @@
 package com.silicus.librarymanagement.ServiceImplementation;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Collection;
 
 import com.silicus.librarymanagement.Service.UserService;
@@ -13,12 +15,7 @@ public class UserServiceImpl<T> implements UserService<T> {
 		return null;
 	}
 
-	@Override
-	public T insert(T t) {
-		return t;
-		// TODO Auto-generated method stub
-		
-	}
+
 	public Collection<T> findAll() {
 		// TODO Auto-generated method stub
 		return null;
@@ -45,6 +42,13 @@ public class UserServiceImpl<T> implements UserService<T> {
 	public Object findById(int id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public void insert(Collection<T> t) throws IOException, FileNotFoundException {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

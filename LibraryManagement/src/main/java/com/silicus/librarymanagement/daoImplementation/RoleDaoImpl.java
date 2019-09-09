@@ -1,5 +1,8 @@
 package com.silicus.librarymanagement.daoImplementation;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
 import com.silicus.librarymanagement.dao.RoleDao;
@@ -13,12 +16,7 @@ public class RoleDaoImpl<T> implements RoleDao<T> {
 		return null;
 	}
 
-	@Override
-	public T insert(T t) {
-		return t;
-		// TODO Auto-generated method stub
-		
-	}
+	
 	@Override
 	public List<T> findAll() {
 		// TODO Auto-generated method stub
@@ -47,6 +45,12 @@ public class RoleDaoImpl<T> implements RoleDao<T> {
 	public T findByName(String name) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void insert(Collection<T> t) throws IOException, FileNotFoundException {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
