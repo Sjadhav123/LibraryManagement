@@ -245,18 +245,18 @@ public class MainClass {
 
 						// Read Operation
 						case 2:
-							//find all records
+					    //find all records in BookReturnTracker
 							bkReturn.findAll();
 							nextCheck = true;
 							break;
-						// Update Book Operation
+						// Update BookReturnTracker Record
 						case 3:
 							System.out.println("Enter the book Return id to be updated:");
 							int id = sc.nextInt();
 							bkReturn.update(id);
 							nextCheck = true;
 							break;
-		                //Delete The Book Operation
+		                //Delete The BookReturntracker Record 
 						case 4:
 							System.out.println("Enter the book Return id to be deleted:");
 						    id = sc.nextInt();

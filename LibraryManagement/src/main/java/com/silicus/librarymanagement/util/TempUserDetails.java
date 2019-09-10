@@ -17,12 +17,6 @@ import com.silicus.librarymanagment.entity.User;
 
 public class TempUserDetails {
 
-	
-	public static void main(String[] args) {
-
-	}
-	
-	
 	public static HashSet<User> getListOfUsers()
 	{
 		
@@ -74,135 +68,7 @@ public class TempUserDetails {
 		return as;
 		
 	}
-	
-	
-	
-	
-	
-// to write the Bookreturn tracker objects to file
-
-	public static void writeToFile(LinkedHashSet<BookReturnTracker> bookset) throws IOException, ClassNotFoundException {
-		File file = new File("D:\\FileOperationsReturnTracker.txt");
-		LinkedHashSet<BookReturnTracker> existingHashset = getExistingObjects();
-		FileOutputStream outputStream = new FileOutputStream(file);
-		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-		System.out.println("new books" + bookset.size());
-		if (existingHashset != null) {
-			System.out.println("existing books:" + existingHashset.size());
-			existingHashset.addAll(bookset);
-
-		} else {
-			System.out.println("existing books:" + 0);
-			existingHashset = bookset;
-		}
-		System.out.println("Updated Bookset to write to file:");
-		objectOutputStream.writeObject(existingHashset);
-		objectOutputStream.close();
-		System.out.println("Objects have been successfully written to file");
-		System.out.println("Total books:" + existingHashset.size());
-		System.out.println("Total books are:" + getExistingObjects());
-		// return existingHashset;
-	}
-
-
-
-// get existing objects i.e. updated objects from list
-	
-	public  static LinkedHashSet<BookReturnTracker> getExistingObjects() throws IOException, ClassNotFoundException {
-		LinkedHashSet<BookReturnTracker> bookReturnTracker = null;
-		ObjectInputStream input = null;
-		File file = new File("D:\\FileOperationsReturnTracker.txt");
-		try {
-
-			if (file.exists()) {
-				FileInputStream fis = new FileInputStream(file);
-				
-				input = new ObjectInputStream(fis);
-				bookReturnTracker = (LinkedHashSet<BookReturnTracker>) input.readObject();
-			}
-		} catch (EOFException e) {
-			e.printStackTrace();
-		} finally {
-			if (file.exists()) {
-				input.close();
-			}
-		}
-		System.out.println("Book size"+bookReturnTracker.size());
-		System.out.println("All books:" + bookReturnTracker);
-		return bookReturnTracker;
-
-	}
-
-	
-	
-	
-	
-	
-
-	
-	
-	// update the book return tracker for time being
-	public  static void updateBook() throws ClassNotFoundException, IOException {
-
-		System.out.println("Enter book return id to update the bookreturn status:");
-		Scanner scanner = new Scanner(System.in);
-		int id = scanner.nextInt();
-		LinkedHashSet<BookReturnTracker> bookReturnTracker = null;
-		try {
-			bookReturnTracker = getExistingObjects();
-		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		for (BookReturnTracker book : bookReturnTracker) {
-			if (book.getId() == id) {
-				book.setFineAmount(90000);
-				bookReturnTracker.add(book);
-				break;
-			}
-		}
-        
-		System.out.println("After updation of BookReturn Tracker"+bookReturnTracker.toString());
-		writeToFile(bookReturnTracker);
-
-	}
-
-
-
-	// delete the record from bookreturn tracker
-	public  static void deleteBook() throws ClassNotFoundException, IOException {
-
-		System.out.println("Enter book return id to delete the book from Bookreturn tracker:");
-		Scanner scanner = new Scanner(System.in);
-		int id = scanner.nextInt();
-		LinkedHashSet<BookReturnTracker> bookReturnTracker = null;
-		try {
-			bookReturnTracker = getExistingObjects();
-		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		for (BookReturnTracker book : bookReturnTracker) {
-			if (book.getId() == id) {
-				bookReturnTracker.remove(book);
-				System.out.println("Book successfully deleted");
-				break;
-			}
-		}
 		
-		System.out.println("Bookset after deletion:" + bookReturnTracker.size());
-     	System.out.println("Record in bookset after deletion="+bookReturnTracker.toString());
-	
-		File file = new File("D:\\FileOperationsReturnTracker.txt");
-		FileOutputStream outputStream = new FileOutputStream(file);
-		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-		objectOutputStream.writeObject(bookReturnTracker);
-
-	}
-
-	
 // to get all list of Available Users******************************************//
 
 	public static User getUser(int id) {
@@ -227,11 +93,18 @@ public class TempUserDetails {
 
 
 
-
-
-
-
-
-
-
+	
+	public static void main(String[] args) {
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
