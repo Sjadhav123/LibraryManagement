@@ -9,6 +9,11 @@ public class BookReturnTracker implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int id;
+	@Override
+	public String toString() {
+		return "BookReturnTracker [id=" + id + ", issueId=" + issueId + ", returnDate=" + returnDate + ", receiver="
+				+ receiver + ", fineAmount=" + fineAmount + "]";
+	}
 	private int issueId;
 	private String returnDate;
 	private User receiver;
