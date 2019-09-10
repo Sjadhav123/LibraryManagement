@@ -52,8 +52,12 @@ public class BookDaoImpl<T> implements BookDao<T> {
 				break;
 			}
 		}
-		System.out.println("BookSet after update Operation:" + bookSet.toString());
-		insert((Collection<T>) bookSet);
+		
+		File file = new File("D:\\FileOperationsPractice123456.txt");
+		FileOutputStream outputStream = new FileOutputStream(file);
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+		objectOutputStream.writeObject(bookSet);
+		System.out.println("BookSet after update and write Operation:" + bookSet.toString());
 		return null;
 	}
 
