@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Scanner;
@@ -92,6 +94,35 @@ public class TempUserDetails {
 	// to get all list of Available Users******************************************//
 
 
+	// To calculate the fine Amount 
+		public static long fineCalculation(String dateOfReturn) {
+
+			
+			String dateBeforeString = "2019-09-01";
+			String dateAfterString = dateOfReturn;
+				
+			//Parsing the date
+			LocalDate dateBefore = LocalDate.parse(dateBeforeString);
+			LocalDate dateAfter = LocalDate.parse(dateAfterString);
+				
+			//calculating number of days in between
+			long noOfDaysBetween = ChronoUnit.DAYS.between(dateBefore, dateAfter);
+			
+			int LateCountDay = (int) noOfDaysBetween - 10;
+			System.out.println("No Of Days Late"+LateCountDay);
+			if(LateCountDay >= 10) {
+			long FineAmount=(long)LateCountDay*100;
+			return FineAmount;
+			}
+			
+		return 0;	
+
+		}
+
+
+
+
+	
 
 	
 	public static void main(String[] args) {
