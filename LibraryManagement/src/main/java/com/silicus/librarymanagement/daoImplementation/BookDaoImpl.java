@@ -23,7 +23,6 @@ import com.silicus.librarymanagment.entity.Book;
 public class BookDaoImpl<T> implements BookDao<T> {
 
 	private Set<Book> bookset = new LinkedHashSet<>();
-	Utilities utilities = new Utilities();
 
 	public BookDaoImpl() {
 		// TODO Auto-generated constructor stub
@@ -57,8 +56,7 @@ public class BookDaoImpl<T> implements BookDao<T> {
 			}
 		}
 
-		String bookFilePath = utilities.getFilePath();
-		File file = new File(bookFilePath);
+		File file = new File("D:\\BookRecords1.txt");
 		FileOutputStream outputStream = new FileOutputStream(file);
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
 		objectOutputStream.writeObject(bookSet);
@@ -85,8 +83,7 @@ public class BookDaoImpl<T> implements BookDao<T> {
 			}
 		}
 		System.out.println("Bookset after deletion:" + bookSet.size());
-		String bookFilePath = utilities.getFilePath();
-		File file = new File(bookFilePath);
+		File file = new File("D:\\BookRecords1.txt");
 		FileOutputStream outputStream = new FileOutputStream(file);
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
 		objectOutputStream.writeObject(bookSet);
@@ -106,8 +103,7 @@ public class BookDaoImpl<T> implements BookDao<T> {
 		Book returnBook = null;
 		HashSet<Book> hsOutput = new LinkedHashSet<Book>();
 		try {
-			String bookFilePath = utilities.getFilePath();
-			File file = new File(bookFilePath);
+			File file = new File("D:\\BookRecords1.txt");
 			FileInputStream fileInputStream = new FileInputStream(file);
 			ObjectInputStream inputStream = new ObjectInputStream(fileInputStream);
 			hsOutput = (LinkedHashSet<Book>) inputStream.readObject();
@@ -135,8 +131,8 @@ public class BookDaoImpl<T> implements BookDao<T> {
 	@Override
 	public void insert(Collection<T> t) throws IOException, FileNotFoundException, ClassNotFoundException {
 		System.out.println("IN INSERT :::::::::BOOKSET AFTER UPDATE OPERATION" + t.toString());
-		String bookFilePath = utilities.getFilePath();
-		File file = new File(bookFilePath);
+		File file = new File("D:\\BookRecords1.txt");
+
 		LinkedHashSet<Book> existingHashset = getExistingObjects();
 		FileOutputStream outputStream = new FileOutputStream(file);
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
@@ -166,8 +162,8 @@ public class BookDaoImpl<T> implements BookDao<T> {
 	public LinkedHashSet<Book> getExistingObjects() throws IOException, ClassNotFoundException {
 		LinkedHashSet<Book> bookset = null;
 		ObjectInputStream input = null;
-		String bookFilePath = utilities.getFilePath();
-		File file = new File(bookFilePath);
+		File file = new File("D:\\BookRecords1.txt");
+
 		try {
 
 			if (file.exists()) {

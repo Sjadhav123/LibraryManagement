@@ -22,7 +22,7 @@ public class Utilities {
 	}
 
 	
-	public String getFilePath() throws FileNotFoundException, IOException{
+	public String getFilePath(String inputPath) throws FileNotFoundException, IOException{
 		
 		  try (InputStream input = new FileInputStream("FileProperties.properties")) {
 
@@ -33,8 +33,15 @@ public class Utilities {
 
 	            // get the property value and print it out
 	            
-	            System.out.println(prop.getProperty("bookFilePath"));
-	            return prop.getProperty("bookFilePath");
+	            if(inputPath.equals("book")) {	            
+		            System.out.println(prop.getProperty("bookFilePath"));
+		            return prop.getProperty("bookFilePath");
+		            }else if(inputPath.equals("bookReturn")){
+		            	 System.out.println(prop.getProperty("bookFilePath"));
+		 	            return prop.getProperty("bookReturnFilePath");
+		            }
+	               
+		            return null;
 	}
 
 		  

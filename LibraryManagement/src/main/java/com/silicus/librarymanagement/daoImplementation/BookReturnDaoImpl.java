@@ -13,11 +13,13 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import com.silicus.librarymanagement.dao.BookReturnDao;
+import com.silicus.librarymanagement.util.Utilities;
 import com.silicus.librarymanagment.entity.BookReturnTracker;
 
 public class BookReturnDaoImpl<T> implements BookReturnDao<T> {
 	
 	private Set<BookReturnTracker> bookset = new LinkedHashSet<BookReturnTracker>();
+	Utilities utilities = new Utilities();
 
 	
 	
@@ -41,8 +43,8 @@ public class BookReturnDaoImpl<T> implements BookReturnDao<T> {
 		System.out.println("BookReturnSet  after update Operation:" + bookSet.toString());
 		//insert((Collection<T>) bookSet);
 		
-		
-		File file = new File("D:\\FileOperationsReturnTracker.txt");
+		String BookReturnfilePath = utilities.getFilePath("bookReturn");
+		File file = new File(BookReturnfilePath);
 		FileOutputStream outputStream = new FileOutputStream(file);
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
 		objectOutputStream.writeObject(bookSet);
@@ -79,7 +81,9 @@ public class BookReturnDaoImpl<T> implements BookReturnDao<T> {
 		}
 		
 		System.out.println("BookReturnSet  size after Deletion :" + bookSet.size());
-		File file = new File("D:\\FileOperationsReturnTracker.txt");
+		String BookReturnfilePath = utilities.getFilePath("bookReturn");
+		File file = new File(BookReturnfilePath);
+		
 		FileOutputStream outputStream = new FileOutputStream(file);
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
 		objectOutputStream.writeObject(bookSet);
@@ -113,7 +117,9 @@ public class BookReturnDaoImpl<T> implements BookReturnDao<T> {
 	@Override
 	public void insert(Collection<T> t) throws IOException, FileNotFoundException, ClassNotFoundException {
 		
-		File file = new File("D:\\FileOperationsReturnTracker.txt");
+		String BookReturnfilePath = utilities.getFilePath("bookReturn");
+		File file = new File(BookReturnfilePath);
+		
 		LinkedHashSet<BookReturnTracker> existingHashset = getExistingObjects();
 		FileOutputStream outputStream = new FileOutputStream(file);
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
@@ -145,7 +151,10 @@ public class BookReturnDaoImpl<T> implements BookReturnDao<T> {
 	public LinkedHashSet<BookReturnTracker> getExistingObjects() throws IOException, ClassNotFoundException {
 		LinkedHashSet<BookReturnTracker> bookset = null;
 		ObjectInputStream input = null;
-		File file = new File("D:\\FileOperationsReturnTracker.txt");
+		
+		String BookReturnfilePath = utilities.getFilePath("bookReturn");
+		File file = new File(BookReturnfilePath);
+		
 		try {
 
 			if (file.exists()) {
