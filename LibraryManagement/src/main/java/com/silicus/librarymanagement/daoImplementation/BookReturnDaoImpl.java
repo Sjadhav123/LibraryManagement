@@ -77,7 +77,8 @@ public class BookReturnDaoImpl<T> implements BookReturnDao<T> {
 				break;
 			}
 		}
-		System.out.println("BookReturnSet  after deletion:" + bookSet.size());
+		
+		System.out.println("BookReturnSet  size after Deletion :" + bookSet.size());
 		File file = new File("D:\\FileOperationsReturnTracker.txt");
 		FileOutputStream outputStream = new FileOutputStream(file);
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
