@@ -96,7 +96,7 @@ public class TempUserDetails {
 
 	// To calculate the fine Amount 
 		public static long fineCalculation(String dateOfReturn) {
-
+            
 			
 			String dateBeforeString = "2019-09-01";
 			String dateAfterString = dateOfReturn;
