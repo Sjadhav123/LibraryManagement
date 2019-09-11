@@ -19,9 +19,10 @@ public class Utilities {
 		return Integer.parseInt(str);
 	}
 
-	public String getFilePath(String type) throws FileNotFoundException, IOException {
+	public String getFilePath(String inputPath) throws FileNotFoundException, IOException {
 
 		String filePath = "";
+
 		try (InputStream input = new FileInputStream("FileProperties.properties")) {
 
 			Properties prop = new Properties();
@@ -30,12 +31,17 @@ public class Utilities {
 			prop.load(input);
 
 			// get the property value and print it out
-			if (type.equals("book")) {
-				filePath = prop.getProperty("bookFilePath");
-				System.out.println(filePath);
+
+			if (inputPath.equals("book")) {
+				System.out.println(prop.getProperty("bookFilePath"));
+				return prop.getProperty("bookFilePath");
+			} else if (inputPath.equals("bookReturn")) {
+				System.out.println(prop.getProperty("bookFilePath"));
+				return prop.getProperty("bookReturnFilePath");
 			}
+
+			return null;
 		}
-		return filePath;
 
 	}
 }

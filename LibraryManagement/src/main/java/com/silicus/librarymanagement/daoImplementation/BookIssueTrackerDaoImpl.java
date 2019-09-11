@@ -13,6 +13,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import com.silicus.librarymanagement.dao.BookIssueTrackerDao;
+import com.silicus.librarymanagement.util.Utilities;
 import com.silicus.librarymanagment.entity.BookIssueTracker;
 
 public class BookIssueTrackerDaoImpl<T> implements BookIssueTrackerDao<T> {
@@ -20,6 +21,7 @@ public class BookIssueTrackerDaoImpl<T> implements BookIssueTrackerDao<T> {
 
 	
 	private Set<BookIssueTracker> bookIssueTrackerset = new LinkedHashSet<>();
+	Utilities utilities = new Utilities();
 
 	@Override
 	public T update(int id) {
