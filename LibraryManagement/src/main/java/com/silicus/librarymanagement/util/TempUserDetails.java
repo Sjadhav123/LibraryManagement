@@ -71,7 +71,7 @@ public class TempUserDetails {
 		
 	}
 		
-// to get all list of Available Users******************************************//
+// to get all list of Available Users****************************************//
 
 	public static User getUser(int id) {
 		User defaultUSer=new User();
