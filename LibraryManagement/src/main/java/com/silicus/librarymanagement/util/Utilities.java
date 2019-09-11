@@ -1,5 +1,10 @@
 package com.silicus.librarymanagement.util;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 import java.util.UUID;
 
 public class Utilities {
@@ -15,5 +20,23 @@ public class Utilities {
         str=filterStr.replaceAll("-", "");
         return Integer.parseInt(str);
 	}
+
 	
+	public String getFilePath() throws FileNotFoundException, IOException{
+		
+		  try (InputStream input = new FileInputStream("FileProperties.properties")) {
+
+	            Properties prop = new Properties();
+
+	            // load a properties file
+	            prop.load(input);
+
+	            // get the property value and print it out
+	            
+	            System.out.println(prop.getProperty("bookFilePath"));
+	            return prop.getProperty("bookFilePath");
+	}
+
+		  
+	}
 }

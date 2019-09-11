@@ -5,8 +5,20 @@ import java.io.IOException;
 import java.util.Collection;
 
 import com.silicus.librarymanagement.Service.BookIssueTrackerService;
+import com.silicus.librarymanagement.daoImplementation.BookIssueTrackerDaoImpl;
+import com.silicus.librarymanagment.entity.BookIssueTracker;
 
 public class BookIssueTrackerServiceImpl<T> implements BookIssueTrackerService<T> {
+
+	BookIssueTrackerDaoImpl<BookIssueTracker>bookIssueTrackerDaoImpl;
+	
+	
+	
+	public BookIssueTrackerServiceImpl() {
+	
+		this.bookIssueTrackerDaoImpl=new BookIssueTrackerDaoImpl<>();
+	
+	}
 
 
 	@Override
@@ -50,7 +62,12 @@ public class BookIssueTrackerServiceImpl<T> implements BookIssueTrackerService<T
 
 	@Override
 	public void insert(Collection<T> t) throws IOException, FileNotFoundException {
-		// TODO Auto-generated method stub
+			try {
+				bookIssueTrackerDaoImpl.insert((Collection<BookIssueTracker>) t);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
 	}
 
