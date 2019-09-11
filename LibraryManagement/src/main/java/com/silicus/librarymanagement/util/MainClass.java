@@ -208,12 +208,14 @@ public class MainClass {
 								int bookIssueId= sc.nextInt();
 								sc.nextLine();
 		                             
-								System.out.println("Enter the book return Date in (YYYY-MM-DD): Format");
+								System.out.println("Enter the book return Date:");
 								String dateOfReturn= sc.next();
 								sc.nextLine();
 				
-							    //Calculate the fine using date differance between DOI and DOR  
-							    long fineCalculation = TempUserDetails.fineCalculation(dateOfReturn);
+							      
+								System.out.println("Enter the book FineAmount:");
+								Double fineAmount= sc.nextDouble();
+								sc.nextLine();
 								
 								System.out.println("Enter the User id:");
 							    int id= sc.nextInt();
@@ -222,7 +224,7 @@ public class MainClass {
 							    bkreturn.setId(returnId);
 							    bkreturn.setIssueId(bookIssueId);
 							    bkreturn.setReturnDate(dateOfReturn);
-							    bkreturn.setFineAmount(fineCalculation);
+							    bkreturn.setFineAmount(fineAmount);
 							    bkreturn.setReceiver(userDetails);
 							    
 							    bookReturnset.add(bkreturn);
@@ -254,7 +256,7 @@ public class MainClass {
 							bkReturn.update(id);
 							nextCheck = true;
 							break;
-		                //Delete The BookReturn tracker Record 
+		                //Delete The BookReturntracker Record 
 						case 4:
 							System.out.println("Enter the book Return id to be deleted:");
 						    id = sc.nextInt();
