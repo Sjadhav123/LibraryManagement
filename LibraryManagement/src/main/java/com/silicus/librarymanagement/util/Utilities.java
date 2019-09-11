@@ -39,6 +39,9 @@ public class Utilities {
 				System.out.println(prop.getProperty("bookFilePath"));
 				return prop.getProperty("bookReturnFilePath");
 			}
+			else if(inputPath.equals("bookIssue")){
+				return prop.getProperty("bookIssueRecordsFilePath");
+			}
 
 			return null;
 		}

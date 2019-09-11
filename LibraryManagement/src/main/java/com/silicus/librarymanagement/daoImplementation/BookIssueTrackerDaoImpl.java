@@ -23,23 +23,75 @@ public class BookIssueTrackerDaoImpl<T> implements BookIssueTrackerDao<T> {
 	private Set<BookIssueTracker> bookIssueTrackerset = new LinkedHashSet<>();
 	Utilities utilities = new Utilities();
 
+	
 	@Override
-	public T update(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public T update(int id) throws FileNotFoundException, IOException {
+
+
+		LinkedHashSet<BookIssueTracker> bookIssueTrackerSet = null;
+		try {
+			bookIssueTrackerSet = getExistingObjects();
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		for ( BookIssueTracker bookIssueObj : bookIssueTrackerSet) {
+			if (bookIssueObj.getId() == id) {
+				bookIssueObj.setIssuer("New Issuer");
+				bookIssueObj.setExpDate("31-10-2019");
+				bookIssueTrackerSet.add(bookIssueObj);
+				break;
+			}
+		}
+		
+
+		String bookIssueRecordsFilePath = utilities.getFilePath("bookIssue");
+		File file = new File(bookIssueRecordsFilePath);
+		FileOutputStream outputStream = new FileOutputStream(file);
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+		objectOutputStream.writeObject(bookIssueTrackerset);
+		System.out.println("BookSet after update and write Operation:" + bookIssueTrackerSet.toString());
+		return (T) bookIssueTrackerSet;
 	}
 
 	
 	@Override
-	public Collection<T> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public Collection<T> findAll() throws ClassNotFoundException, IOException {
+		LinkedHashSet<BookIssueTracker> issueTrackerSet = getExistingObjects();
+		return (Collection<T>) issueTrackerSet;
 	}
 
-	@Override
-	public boolean delete(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+	
+		@Override
+		public boolean delete(Long id) throws IOException {
+
+			LinkedHashSet<BookIssueTracker> bookIssueTrackerSet = null;
+			try {
+				bookIssueTrackerSet = getExistingObjects();
+			} catch (ClassNotFoundException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			for (BookIssueTracker book : bookIssueTrackerSet) {
+				if (book.getId() == id) {
+					bookIssueTrackerSet.remove(book);
+					System.out.println("Book successfully deleted");
+					break;
+				}
+			}
+			System.out.println("Bookset after deletion:" + bookIssueTrackerSet.size());
+
+			String bookIssueRecordsFilePath = utilities.getFilePath("bookIssue");
+			File file = new File(bookIssueRecordsFilePath);
+			FileOutputStream outputStream = new FileOutputStream(file);
+			ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+			objectOutputStream.writeObject(bookIssueTrackerSet);
+
+			return false;
+	
+
 	}
 
 	@Override
@@ -60,12 +112,15 @@ public class BookIssueTrackerDaoImpl<T> implements BookIssueTrackerDao<T> {
 		return null;
 	}
 
+	
+	/*****************************Write BookIssueTracker Objects**********************/
 	@Override
 	public void insert(Collection<T> t) throws IOException, FileNotFoundException, ClassNotFoundException {
 			
 		
 		System.out.println("IN INSERT ::::::bookIssue Records AFTER UPDATE OPERATION" + t.toString());
-		File file = new File("D:\\BookIssueTracker1.txt");
+		String bookIssueRecordsFilePath = utilities.getFilePath("bookIssue");
+		File file = new File(bookIssueRecordsFilePath);
 		LinkedHashSet<BookIssueTracker> existingHashset = getExistingObjects();
 		FileOutputStream outputStream = new FileOutputStream(file);
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
@@ -93,10 +148,13 @@ public class BookIssueTrackerDaoImpl<T> implements BookIssueTrackerDao<T> {
 	}
 
 	
+	
+    // **************		Read All BookIssueTracker Records.
 	public LinkedHashSet<BookIssueTracker> getExistingObjects() throws IOException, ClassNotFoundException {
 		LinkedHashSet<BookIssueTracker> bookIssueTrackerset = null;
 		ObjectInputStream input = null;
-		File file = new File("D:\\BookIssueTracker1.txt");
+		String bookIssueRecordsFilePath = utilities.getFilePath("bookIssue");
+		File file = new File(bookIssueRecordsFilePath);
 		try {
 
 			if (file.exists()) {

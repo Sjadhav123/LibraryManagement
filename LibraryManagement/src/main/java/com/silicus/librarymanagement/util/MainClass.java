@@ -102,23 +102,25 @@ public class MainClass {
 				// Read Operation
 				case 2:
 					bookServiceImpl.findAll();
-					nextCheck = false;
+					nextCheck = true;
 					break;
 				// UPdate Book Operation
 				case 3:
 					System.out.println("Enter the book id to update the book:");
 					int id=sc.nextInt();
 					bookServiceImpl.update(id);
-					nextCheck = false;
+					nextCheck = true;
 					break;
 
 				case 4:
-					
-					nextCheck = false;
+					System.out.println("Enter the book id to update the book:");
+					int bookId=sc.nextInt();
+					bookServiceImpl.delete((long) bookId);
+					nextCheck = true;
 					break;
 
 				case 5:
-					nextCheck = true;
+					nextCheck = false;
 					break;
 
 				default:
@@ -174,14 +176,45 @@ public class MainClass {
 						System.out.println("Size of bookIssueRecords is:" + issueTrackerSet.size());
 						sc.nextLine();
 						System.out.println("Do you want to add more bookIusse Records? Yes/No");
-						sc.nextLine();
 						readmoreinput = sc.nextBoolean();
 					} while (readmoreinput);
 					
 					nextCheck = true;
 					bookset = new LinkedHashSet<>();
 					break;
-				}
+
+					// Read Operation
+					case 2:
+					    issueTrackerServiceImpl.findAll();
+						nextCheck = true;
+						break;
+					// UPdate Book Operation
+					case 3:
+						System.out.println("Enter the book id to update the book:");
+						int id=sc.nextInt();
+						issueTrackerServiceImpl.update(id);
+						nextCheck = true;
+						break;
+
+					case 4:
+						System.out.println("Enter the book id to update the book:");
+						int bookId=sc.nextInt();
+						issueTrackerServiceImpl.delete((long) bookId);
+						nextCheck = true;
+						break;
+
+					case 5:
+						nextCheck = false;
+						break;
+
+					default:
+						break;
+					} // Child Switch closed
+
+					break; // Breaking Book Case
+					
+
+				
 
 /******** Book Issue Tracker service ends here********/
 

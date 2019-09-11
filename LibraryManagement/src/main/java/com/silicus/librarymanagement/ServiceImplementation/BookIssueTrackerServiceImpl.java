@@ -30,20 +30,37 @@ public class BookIssueTrackerServiceImpl<T> implements BookIssueTrackerService<T
 
 	@Override
 	public T update(int id) {
-		// TODO Auto-generated method stub
+	
+		try {
+			bookIssueTrackerDaoImpl.update(id);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	
 	@Override
 	public Collection<T> findAll() {
-		// TODO Auto-generated method stub
+		try {
+			return (Collection<T>) bookIssueTrackerDaoImpl.findAll();
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
+		
 	}
 
 	@Override
 	public boolean delete(Long id) {
-		// TODO Auto-generated method stub
+		try {
+			bookIssueTrackerDaoImpl.delete(id);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 
