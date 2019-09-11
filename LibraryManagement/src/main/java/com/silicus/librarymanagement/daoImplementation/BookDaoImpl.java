@@ -57,7 +57,7 @@ public class BookDaoImpl<T> implements BookDao<T> {
 			}
 		}
 
-		String bookFilePath = utilities.getFilePath();
+		String bookFilePath = utilities.getFilePath("book");
 		File file = new File(bookFilePath);
 		FileOutputStream outputStream = new FileOutputStream(file);
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
@@ -85,7 +85,7 @@ public class BookDaoImpl<T> implements BookDao<T> {
 			}
 		}
 		System.out.println("Bookset after deletion:" + bookSet.size());
-		String bookFilePath = utilities.getFilePath();
+		String bookFilePath = utilities.getFilePath("book");
 		File file = new File(bookFilePath);
 		FileOutputStream outputStream = new FileOutputStream(file);
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
@@ -106,7 +106,7 @@ public class BookDaoImpl<T> implements BookDao<T> {
 		Book returnBook = null;
 		HashSet<Book> hsOutput = new LinkedHashSet<Book>();
 		try {
-			String bookFilePath = utilities.getFilePath();
+			String bookFilePath = utilities.getFilePath("book");
 			File file = new File(bookFilePath);
 			FileInputStream fileInputStream = new FileInputStream(file);
 			ObjectInputStream inputStream = new ObjectInputStream(fileInputStream);
@@ -135,7 +135,7 @@ public class BookDaoImpl<T> implements BookDao<T> {
 	@Override
 	public void insert(Collection<T> t) throws IOException, FileNotFoundException, ClassNotFoundException {
 		System.out.println("IN INSERT :::::::::BOOKSET AFTER UPDATE OPERATION" + t.toString());
-		String bookFilePath = utilities.getFilePath();
+		String bookFilePath = utilities.getFilePath("book");
 		File file = new File(bookFilePath);
 		LinkedHashSet<Book> existingHashset = getExistingObjects();
 		FileOutputStream outputStream = new FileOutputStream(file);
@@ -166,7 +166,7 @@ public class BookDaoImpl<T> implements BookDao<T> {
 	public LinkedHashSet<Book> getExistingObjects() throws IOException, ClassNotFoundException {
 		LinkedHashSet<Book> bookset = null;
 		ObjectInputStream input = null;
-		String bookFilePath = utilities.getFilePath();
+		String bookFilePath = utilities.getFilePath("book");
 		File file = new File(bookFilePath);
 		try {
 

@@ -9,34 +9,33 @@ import java.util.UUID;
 
 public class Utilities {
 
-	
-	
 	public int getRandomnumber() {
 		// TODO Auto-generated method stub
-	    UUID idOne = UUID.randomUUID();
-        String str=""+idOne;        
-        int uid=str.hashCode();
-        String filterStr=""+uid;
-        str=filterStr.replaceAll("-", "");
-        return Integer.parseInt(str);
+		UUID idOne = UUID.randomUUID();
+		String str = "" + idOne;
+		int uid = str.hashCode();
+		String filterStr = "" + uid;
+		str = filterStr.replaceAll("-", "");
+		return Integer.parseInt(str);
 	}
 
-	
-	public String getFilePath() throws FileNotFoundException, IOException{
-		
-		  try (InputStream input = new FileInputStream("FileProperties.properties")) {
+	public String getFilePath(String type) throws FileNotFoundException, IOException {
 
-	            Properties prop = new Properties();
+		String filePath = "";
+		try (InputStream input = new FileInputStream("FileProperties.properties")) {
 
-	            // load a properties file
-	            prop.load(input);
+			Properties prop = new Properties();
 
-	            // get the property value and print it out
-	            
-	            System.out.println(prop.getProperty("bookFilePath"));
-	            return prop.getProperty("bookFilePath");
-	}
+			// load a properties file
+			prop.load(input);
 
-		  
+			// get the property value and print it out
+			if (type.equals("book")) {
+				filePath = prop.getProperty("bookFilePath");
+				System.out.println(filePath);
+			}
+		}
+		return filePath;
+
 	}
 }
