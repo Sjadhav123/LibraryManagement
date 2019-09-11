@@ -135,13 +135,13 @@ public class MainClass {
 									System.out.println("Enter the bid of book:");
 									int bookId = sc.nextInt();
 									sc.nextLine();
-
-									Book book = (Book) bookServiceImpl.findById(bookId);
+                                    Book book = (Book) bookServiceImpl.findById(bookId);
+									
 									System.out.println("Enter the User id to enter in IssueTracker:");
 									int userId = sc.nextInt();
 									sc.nextLine();
 									UserServiceImpl<User>userServiceImpl=new UserServiceImpl<>();
-								     User user = (User) userServiceImpl.findById(userId);
+								    User user = (User) userServiceImpl.findById(userId);
 									
 									System.out.println("Enter the dateOfIssue  of book:");
 									String dateOfIssue = sc.next();
@@ -226,8 +226,11 @@ public class MainClass {
 							    long fineCalculation = TempUserDetails.fineCalculation(dateOfReturn);
 								
 								System.out.println("Enter the User id:");
-							    int id= sc.nextInt();
-							    User userDetails=TempUserDetails.getUser(id);
+							    int Userid= sc.nextInt();
+							    User userDetails=TempUserDetails.getUser(Userid);
+							    //UserServiceImpl<User>userServiceImpl=new UserServiceImpl<>();
+							    //User user = (User) userServiceImpl.findById(userId);
+								
 							    
 							    bkreturn.setId(returnId);
 							    bkreturn.setIssueId(bookIssueId);
