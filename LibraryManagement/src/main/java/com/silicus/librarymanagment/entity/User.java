@@ -4,15 +4,15 @@ import java.io.Serializable;
 
 public class User implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", roleId=" + roleId + ", email=" + email + ", phoneNumber="
 				+ phoneNumber + "]";
 	}
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 	private String roleId;

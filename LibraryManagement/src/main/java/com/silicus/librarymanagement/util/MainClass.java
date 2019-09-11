@@ -10,9 +10,12 @@ import java.io.ObjectOutputStream;
 import java.util.LinkedHashSet;
 import java.util.Scanner;
 
+import com.silicus.librarymanagement.ServiceImplementation.BookIssueTrackerServiceImpl;
 import com.silicus.librarymanagement.ServiceImplementation.BookReturnTrackerServiceImpl;
 import com.silicus.librarymanagement.ServiceImplementation.BookServiceImpl;
+import com.silicus.librarymanagement.ServiceImplementation.UserServiceImpl;
 import com.silicus.librarymanagment.entity.Book;
+import com.silicus.librarymanagment.entity.BookIssueTracker;
 import com.silicus.librarymanagment.entity.BookReturnTracker;
 import com.silicus.librarymanagment.entity.User;
 
@@ -24,6 +27,7 @@ public class MainClass {
 
 		LinkedHashSet<Book> bookset = new LinkedHashSet<>();
 		LinkedHashSet<BookReturnTracker> bookReturnset = new LinkedHashSet<BookReturnTracker>();
+		LinkedHashSet<BookIssueTracker> issueTrackerSet= new LinkedHashSet<BookIssueTracker>();
 
 
 		boolean nextCheck = false;
@@ -37,7 +41,7 @@ public class MainClass {
 			boolean readmoreinput = MainClass.Yes;
 			BookServiceImpl<Book> bookServiceImpl = new BookServiceImpl<Book>();
 	        BookReturnTrackerServiceImpl<BookReturnTracker> bkReturn=new BookReturnTrackerServiceImpl<BookReturnTracker>();
-
+	        BookIssueTrackerServiceImpl<BookIssueTracker> issueTrackerServiceImpl=new BookIssueTrackerServiceImpl<BookIssueTracker>();
 
 			switch (mainMenu) {
 			case 1:
@@ -115,80 +119,86 @@ public class MainClass {
 				} // Child Switch closed
 
 				break; // Breaking Book Case
-			/* Book Issue Tracker Operations */
-			case 2:
-				System.out.println("1 Insert 2 Read 3 Update 4 Delete 5 Exit");
-				int bookIssueOperation = sc.nextInt();
-				switch (bookIssueOperation) {
-				// Insert Operation
-				case 1:
-					do {
-						Book book = new Book();
-						System.out.println("Enter the id of book:");
-						int id = sc.nextInt();
-						sc.nextLine();
-						System.out.println("Enter the name of book:");
-						String name = sc.next();
-						sc.nextLine();
-
-						System.out.println("Enter the author of book:");
-						String author = sc.next();
-						sc.nextLine();
-						System.out.println("Enter the ISBN  of book:");
-						String isbn = sc.next();
-
-						System.out.println("Enter the rackname of book:");
-						String rackName = sc.next();
-
-						System.out.println("Enter the availability flag:");
-						boolean isAvailable = sc.hasNext();
-
-						book.setAuthor(author);
-						book.setAvailable(isAvailable);
-						book.setId(id);
-						book.setISBN(isbn);
-						book.setName(name);
-						book.setRackName(rackName);
-
-						// Book addedBook = bookServiceImpl.insert(book);
-						bookset.add(book);
-						System.out.println("Size of bookset is:" + bookset.size());
-						sc.nextLine();
-						System.out.println("Do you want to add more books? Yes/No");
-						sc.nextLine();
-						readmoreinput = sc.nextBoolean();
-					} while (readmoreinput);
-					writeToFile(bookset);
-					// System.out.println("size of bookset while passing it to
-					// writeFile :" + bookset.size());
-					// readFromFile();
-					nextCheck = true;
-					bookset = new LinkedHashSet<>();
-					break;
-
-				// Read Operation
+				
+/******** Book Issue Tracker service starts here*********/
 				case 2:
-					getExistingObjects();
-					nextCheck = true;
-					break;
-				// UPdate Book Operation
-				case 3:
-					updateBook();
-					nextCheck = true;
-					break;
+							System.out.println("1 Insert 2 Read 3 Update 4 Delete 5 Exit");
+							int bookIssueOperation = sc.nextInt();
+							switch (bookIssueOperation) {
+							// Insert Operation
+							case 1:
+								do {
+									BookIssueTracker bookIssueTracker = new BookIssueTracker();
+									System.out.println("Enter the id for IssueTracker Object:");
+									int id = sc.nextInt();
+									sc.nextLine();
+									System.out.println("Enter the bid of book:");
+									int bookId = sc.nextInt();
+									sc.nextLine();
+                                    Book book = (Book) bookServiceImpl.findById(bookId);
+									
+									System.out.println("Enter the User id to enter in IssueTracker:");
+									int userId = sc.nextInt();
+									sc.nextLine();
+									UserServiceImpl<User>userServiceImpl=new UserServiceImpl<>();
+								    User user = (User) userServiceImpl.findById(userId);
+									
+									System.out.println("Enter the dateOfIssue  of book:");
+									String dateOfIssue = sc.next();
 
-				case 4:
-					deleteBook();
-					nextCheck = true;
-					break;
+									System.out.println("Enter the expDate of book:");
+									String expDate = sc.next();
 
-				default:
-					break;
-				} // Child Switch closed
+									 System.out.println("Enter the issuer name:");
+									  String issuer = sc.next();
 
-				break;
+									  bookIssueTracker.setId(id);;
+									  bookIssueTracker.setBid(bookId);
+									  bookIssueTracker.setDateOfIssue(dateOfIssue);
+									  bookIssueTracker.setExpDate(expDate);
+									  bookIssueTracker.setUser(user);
+									  bookIssueTracker.setIssuer(issuer);
+									  
+									  issueTrackerSet.add(bookIssueTracker);
+									  
+								      issueTrackerServiceImpl.insert(issueTrackerSet);
+									
+									System.out.println("Size of bookIssueRecords is:" + issueTrackerSet.size());
+									sc.nextLine();
+									System.out.println("Do you want to add more bookIusse Records? Yes/No");
+									sc.nextLine();
+									readmoreinput = sc.nextBoolean();
+								} while (readmoreinput);
+								
+								nextCheck = true;
+								bookset = new LinkedHashSet<>();
+								break;
 
-// *******Book return tracker Service starts here**********//			
+							// Read Operation
+							case 2:
+								bookServiceImpl.findAll();
+								nextCheck = true;
+								break;
+							// UPdate Book Operation
+							case 3:
+								bookServiceImpl.update(1);
+								nextCheck = true;
+								break;
+
+							case 4:
+								bookServiceImpl.delete((long) 111111123);
+								nextCheck = true;
+								break;
+
+							default:
+								break;
+							} // Child Switch closed
+
+							break;
+/******** Book Issue Tracker service ends here********/
+
+
+/*******Book return tracker Service starts here**********/			
 				
 					case 3:
 						
@@ -216,8 +226,11 @@ public class MainClass {
 							    long fineCalculation = TempUserDetails.fineCalculation(dateOfReturn);
 								
 								System.out.println("Enter the User id:");
-							    int id= sc.nextInt();
-							    User userDetails=TempUserDetails.getUser(id);
+							    int Userid= sc.nextInt();
+							    User userDetails=TempUserDetails.getUser(Userid);
+							    //UserServiceImpl<User>userServiceImpl=new UserServiceImpl<>();
+							    //User user = (User) userServiceImpl.findById(userId);
+								
 							    
 							    bkreturn.setId(returnId);
 							    bkreturn.setIssueId(bookIssueId);
@@ -385,3 +398,114 @@ public class MainClass {
 
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+///* Book Issue Tracker Operations */
+//case 2:
+//	System.out.println("1 Insert 2 Read 3 Update 4 Delete 5 Exit");
+//	int bookIssueOperation = sc.nextInt();
+//	switch (bookIssueOperation) {
+//	// Insert Operation
+//	case 1:
+//		do {
+//			Book book = new Book();
+//			System.out.println("Enter the id of book:");
+//			int id = sc.nextInt();
+//			sc.nextLine();
+//			System.out.println("Enter the name of book:");
+//			String name = sc.next();
+//			sc.nextLine();
+//
+//			System.out.println("Enter the author of book:");
+//			String author = sc.next();
+//			sc.nextLine();
+//			System.out.println("Enter the ISBN  of book:");
+//			String isbn = sc.next();
+//
+//			System.out.println("Enter the rackname of book:");
+//			String rackName = sc.next();
+//
+//			System.out.println("Enter the availability flag:");
+//			boolean isAvailable = sc.hasNext();
+//
+//			book.setAuthor(author);
+//			book.setAvailable(isAvailable);
+//			book.setId(id);
+//			book.setISBN(isbn);
+//			book.setName(name);
+//			book.setRackName(rackName);
+//
+//			// Book addedBook = bookServiceImpl.insert(book);
+//			bookset.add(book);
+//			System.out.println("Size of bookset is:" + bookset.size());
+//			sc.nextLine();
+//			System.out.println("Do you want to add more books? Yes/No");
+//			sc.nextLine();
+//			readmoreinput = sc.nextBoolean();
+//		} while (readmoreinput);
+//		writeToFile(bookset);
+//		// System.out.println("size of bookset while passing it to
+//		// writeFile :" + bookset.size());
+//		// readFromFile();
+//		nextCheck = true;
+//		bookset = new LinkedHashSet<>();
+//		break;
+//
+//	// Read Operation
+//	case 2:
+//		getExistingObjects();
+//		nextCheck = true;
+//		break;
+//	// UPdate Book Operation
+//	case 3:
+//		updateBook();
+//		nextCheck = true;
+//		break;
+//
+//	case 4:
+//		deleteBook();
+//		nextCheck = true;
+//		break;
+//
+//	default:
+//		break;
+//	} // Child Switch closed
+//
+//	break;

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class BookIssueTracker implements Serializable {
 
+
 	/**
 	 * 
 	 */
@@ -100,6 +101,10 @@ public class BookIssueTracker implements Serializable {
 		return true;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "BookIssueTracker [id=" + id + ", bid=" + bid + ", user=" + user + ", dateOfIssue=" + dateOfIssue
+				+ ", expDate=" + expDate + ", issuer=" + issuer + "]";
+	}
 	
 }
