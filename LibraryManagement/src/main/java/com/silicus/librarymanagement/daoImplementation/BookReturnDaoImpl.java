@@ -116,27 +116,26 @@ public class BookReturnDaoImpl<T> implements BookReturnDao<T> {
 		LinkedHashSet<BookReturnTracker> existingHashset = getExistingObjects();
 		FileOutputStream outputStream = new FileOutputStream(file);
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-		System.out.println("new books" + t.size());
+		System.out.println("new BookReturnTracker Record" + t.size());
 		bookset = (Set<BookReturnTracker>) t;
-		System.out.println("BookReturnSet  After update operation in insert:" + bookset.toString());
+//		System.out.println("BookReturnSet  After update operation in insert:" + bookset.toString());
 		
 		if (existingHashset != null) {
 			System.out.println("existing BookReturnSet :" + existingHashset.size());
 			System.out.println("existing BookReturnSet :" + existingHashset.toString());
 			existingHashset.addAll(bookset);
-			System.out.println(
-					"Bookset After adding BookReturnSet  to existing hashset in insert:" + existingHashset.toString());
+			System.out.println("Bookset After adding BookReturnSet  to existing hashset in insert:" + existingHashset.toString());
 
 		} else {
-			System.out.println("existing books:" + 0);
+			System.out.println("existing Records:" + 0);
 			existingHashset = (LinkedHashSet<BookReturnTracker>) t;
 		}
 		System.out.println("Updated BookReturnSet  to write to file:");
 		objectOutputStream.writeObject(existingHashset);
 		objectOutputStream.close();
         System.out.println("Objects have been successfully written to file");
-		System.out.println("Total books:" + existingHashset.size());
-		System.out.println("Total books are:" + getExistingObjects());
+		System.out.println("Total books:" +     existingHashset.size());
+		System.out.println("After insert operation Total books are:" + getExistingObjects());
 
 	}
 
@@ -161,7 +160,7 @@ public class BookReturnDaoImpl<T> implements BookReturnDao<T> {
 				input.close();
 			}
 		}
-		System.out.println("All books:" + bookset);
+		System.out.println(" All books:" + bookset);
 		return bookset;
 		
 	}
