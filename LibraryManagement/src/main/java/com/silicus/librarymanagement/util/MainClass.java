@@ -11,37 +11,41 @@ import java.util.LinkedHashSet;
 import java.util.Scanner;
 
 import com.silicus.librarymanagement.ServiceImplementation.BookIssueTrackerServiceImpl;
+import com.silicus.librarymanagement.ServiceImplementation.BookReturnTrackerServiceImpl;
 import com.silicus.librarymanagement.ServiceImplementation.BookServiceImpl;
 import com.silicus.librarymanagement.ServiceImplementation.UserServiceImpl;
 import com.silicus.librarymanagment.entity.Book;
 import com.silicus.librarymanagment.entity.BookIssueTracker;
+import com.silicus.librarymanagment.entity.BookReturnTracker;
 import com.silicus.librarymanagment.entity.User;
 
 public class MainClass {
 
 	private static final boolean Yes = false;
 
-	/**
-	 * @param args
-	 * @throws IOException
-	 * @throws ClassNotFoundException
-	 */
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 
 		LinkedHashSet<Book> bookset = new LinkedHashSet<>();
+
 		LinkedHashSet<BookIssueTracker>issueTrackerSet=new LinkedHashSet<>();
+
+		LinkedHashSet<BookReturnTracker> bookReturnset = new LinkedHashSet<BookReturnTracker>();
+		
 
 		boolean nextCheck = false;
 		do {
-			System.out.println("**************Library management details*********************");
+			System.out.println("Library management details");
 			System.out.println("please select entity to be manipulated");
-			System.out.println("1 BOOK 2 BookIssueTracker 3 BookReturnTracker 4 Role 5 User 6 Exit");
+			System.out.println("1 BOOK 2 BookIssueTracker 3 BookReturnTracker 4 Role 5 User");
 			Scanner sc = new Scanner(System.in);
 			int mainMenu = sc.nextInt();
 
 			boolean readmoreinput = MainClass.Yes;
 			BookServiceImpl<Book> bookServiceImpl = new BookServiceImpl<Book>();
-			BookIssueTrackerServiceImpl<BookIssueTracker>issueTrackerServiceImpl=new BookIssueTrackerServiceImpl<>();
+
+	        BookReturnTrackerServiceImpl<BookReturnTracker> bkReturn=new BookReturnTrackerServiceImpl<BookReturnTracker>();
+	        BookIssueTrackerServiceImpl<BookIssueTracker> issueTrackerServiceImpl=new BookIssueTrackerServiceImpl<BookIssueTracker>();
+
 
 			switch (mainMenu) {
 			case 1:
@@ -78,15 +82,16 @@ public class MainClass {
 						book.setName(name);
 						book.setRackName(rackName);
 
+						 
 						bookset.add(book);
-		           	    bookServiceImpl.insert(bookset);
+						bookServiceImpl.insert(bookset);
 						System.out.println("Size of bookset is:" + bookset.size());
 						sc.nextLine();
 						System.out.println("Do you want to add more books? Yes/No");
 						sc.nextLine();
 						readmoreinput = sc.nextBoolean();
 					} while (readmoreinput);
-					//writeToFile(bookset);
+					
 					// System.out.println("size of bookset while passing it to
 					// writeFile :" + bookset.size());
 					// readFromFile();
@@ -97,21 +102,19 @@ public class MainClass {
 				// Read Operation
 				case 2:
 					bookServiceImpl.findAll();
-					nextCheck = true;
+					nextCheck = false;
 					break;
 				// UPdate Book Operation
 				case 3:
-					System.out.println("Enter the book id to be updated:");
-					int id = sc.nextInt();
+					System.out.println("Enter the book id to update the book:");
+					int id=sc.nextInt();
 					bookServiceImpl.update(id);
-					nextCheck = true;
+					nextCheck = false;
 					break;
 
 				case 4:
-					System.out.println("Enter the book id to be updated:");
-				     id = sc.nextInt();
-					bookServiceImpl.delete((long) id);
-					nextCheck = true;
+					
+					nextCheck = false;
 					break;
 
 				case 5:
@@ -124,6 +127,7 @@ public class MainClass {
 
 				break; // Breaking Book Case
 				
+
 			/* Book Issue Tracker Operations */
 			case 2:
 				System.out.println("1 Insert 2 Read 3 Update 4 Delete 5 Exit");
@@ -177,33 +181,100 @@ public class MainClass {
 					nextCheck = true;
 					bookset = new LinkedHashSet<>();
 					break;
+				}
 
-				// Read Operation
-				case 2:
-					bookServiceImpl.findAll();
-					nextCheck = true;
-					break;
-				// UPdate Book Operation
-				case 3:
-					bookServiceImpl.update(1);
-					nextCheck = true;
-					break;
+/******** Book Issue Tracker service ends here********/
 
-				case 4:
-					bookServiceImpl.delete((long) 111111123);
-					nextCheck = true;
-					break;
 
-				default:
-					break;
-				} // Child Switch closed
+/*******Book return tracker Service starts here**********/			
+				
+					case 3:
+						
+						BookReturnTracker bkreturn=new BookReturnTracker();
+						System.out.println("1 Insert 2 Read 3 Update 4 Delete 5 Exit");
+						int bookReturnOperation = sc.nextInt();
+						switch (bookReturnOperation ) {
+						// Insert Operation
+						case 1:
+							do {
+								
+								System.out.println("Enter the Return id :");
+								int returnId = sc.nextInt();
+								sc.nextLine();
+								
+								System.out.println("Enter the book issue ID:");
+								int bookIssueId= sc.nextInt();
+								sc.nextLine();
+		                             
+								System.out.println("Enter the book return Date in (YYYY-MM-DD): Format");
+								String dateOfReturn= sc.next();
+								sc.nextLine();
+				
+							    //Calculate the fine using date differance between DOI and DOR  
+							    long fineCalculation = TempUserDetails.fineCalculation(dateOfReturn);
+								
+								System.out.println("Enter the User id:");
+							    int Userid= sc.nextInt();
+							    User userDetails=TempUserDetails.getUser(Userid);
+							    //UserServiceImpl<User>userServiceImpl=new UserServiceImpl<>();
+							    //User user = (User) userServiceImpl.findById(userId);
+								
+							    
+							    bkreturn.setId(returnId);
+							    bkreturn.setIssueId(bookIssueId);
+							    bkreturn.setReturnDate(dateOfReturn);
+							    bkreturn.setFineAmount(fineCalculation);
+							    bkreturn.setReceiver(userDetails);
+							    
+							    bookReturnset.add(bkreturn);
 
-				break;
+							    bkReturn.insert(bookReturnset);
+							    System.out.println("insert commited");
+							    
+								System.out.println("Size of bookset is:" + bookReturnset.size());
+								sc.nextLine();
+								System.out.println("Do you want to add more books? Yes/No");
+								readmoreinput = sc.nextBoolean();
+							} while (readmoreinput);
+						    // writing Bookreturn tracker object to file named
+						
+							nextCheck = true;
+							bookReturnset = new LinkedHashSet<>();
+							break;
 
+						// Read Operation
+						case 2:
+					    //find all records in BookReturnTracker
+							bkReturn.findAll();
+							nextCheck = true;
+							break;
+						// Update BookReturnTracker Record
+						case 3:
+							System.out.println("Enter the book Return id to be updated:");
+							int id = sc.nextInt();
+							bkReturn.update(id);
+							nextCheck = true;
+							break;
+		                //Delete The BookReturn tracker Record 
+						case 4:
+							System.out.println("Enter the book Return id to be deleted:");
+						    id = sc.nextInt();
+						    bkReturn.delete((long) id);
+							nextCheck = true;
+							break;
+
+
+						default:
+							break;
+						} // Child Switch closed
+
+						break;
+
+//**************Book return tracker operation ends here
+				
 			}// parent Switch Menu
 
 		} while (nextCheck);// Parent do while loop
 
+		}
 	}
-
-}
