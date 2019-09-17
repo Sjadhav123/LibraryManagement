@@ -26,7 +26,8 @@ public class MainClass {
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 
 		LinkedHashSet<Book> bookset = new LinkedHashSet<>();
-
+		LinkedHashSet<User> userset = new LinkedHashSet<>();
+		
 		LinkedHashSet<BookIssueTracker> issueTrackerSet = new LinkedHashSet<>();
 
 		LinkedHashSet<BookReturnTracker> bookReturnset = new LinkedHashSet<BookReturnTracker>();
@@ -41,6 +42,7 @@ public class MainClass {
 
 			boolean readmoreinput = MainClass.Yes;
 			BookServiceImpl<Book> bookServiceImpl = new BookServiceImpl<Book>();
+			UserServiceImpl<User> userServImpl = new UserServiceImpl<>();
 
 			BookReturnTrackerServiceImpl<BookReturnTracker> bkReturn = new BookReturnTrackerServiceImpl<BookReturnTracker>();
 			BookIssueTrackerServiceImpl<BookIssueTracker> issueTrackerServiceImpl = new BookIssueTrackerServiceImpl<BookIssueTracker>();
@@ -290,6 +292,8 @@ public class MainClass {
 					nextCheck = true;
 					break;
 
+					
+					
 				default:
 					break;
 				} // Child Switch closed
@@ -297,6 +301,118 @@ public class MainClass {
 				break;
 
 			// **************Book return tracker operation ends here
+				
+				
+				
+				
+				
+				
+				//**********************Role Service Starts From Here**********************************//
+			case 4: 
+				System.out.println("You are Entered in Role Service Menu");
+				
+				break;
+				//**********************Role Service End Here**********************************//
+				
+				
+				
+				
+				
+				//**********************User Service Starts From Here**********************************//
+			case 5:		
+				
+				System.out.println("Please Enter given Number to Select User Operation \r\n 1: Insert \r\n 2: Read \r\n 3: Update \r\n 4: Delete \r\n 5: Exit \r\n");
+				int userOperation = sc.nextInt();
+				switch (userOperation) {
+				case 1: /*Insert User*/
+					
+					do
+					{
+					User user= new  User();
+					
+					
+					System.out.println("Please enter User Id:");
+					int userid= sc.nextInt();
+					
+					System.out.println("Please enter User Name:");
+					String userName= sc.next();
+					
+					System.out.println("Please enter RoleId:");
+					String roleId= sc.next();
+					System.out.println("Please enter Email:");
+					String email= sc.next();
+					System.out.println("Please enter Phone Number:");
+					String phoneNumber= sc.next();
+					System.out.println(userid+" ,"+userName +" ,"+roleId +" ,"+email +" ,"+ phoneNumber );
+					
+					user.setId(userid);
+					user.setName(userName);
+					user.setRoleId(roleId);
+					user.setEmail(email);
+					user.setPhoneNumber(phoneNumber);
+					userset.add(user);
+					
+					userServImpl.insert(userset);
+					
+					//System.out.println("Size of bookset is:" + userset.size());
+					sc.nextLine();
+					System.out.println("Do you want to add more users? Yes/No");
+					sc.nextLine();
+					
+					readmoreinput =sc.nextBoolean();
+				
+					
+					}while(readmoreinput);
+					nextCheck = true;
+					userset = new LinkedHashSet<>();
+					break;
+					
+				case 2: /*Read User*/
+					System.out.println("You are entered in Read User case \r\n");
+					userServImpl.findAll();
+					nextCheck = true;
+					
+					
+					break;
+					
+				case 3: /*Update User*/
+					System.out.println("Enter the User id need to be updated:");
+					int userid = sc.nextInt();
+					userServImpl.update(userid);
+					nextCheck = true;
+					
+					
+					break;
+					
+					
+				case 4: /*Delete User*/
+					System.out.println("Enter the User id to be Delete:");
+				   int  delId = sc.nextInt();
+				   userServImpl.delete((long) delId);
+					nextCheck = true;
+				
+					
+					
+					break;
+					
+				case 5: /*Exit User*/
+					System.out.println("You are successfully out from Library Management System..!");
+					System.exit(0);
+				
+					break;
+					
+				default:
+					System.out.println("You Have Entered worng input. Please Enter Appropriate Value to Get Operation.!");
+					//System.exit(mainMenu);
+					main(null);
+					break;
+				}	
+				
+				
+				
+				break;
+				//**********************User Service Ends Here**********************************//
+					
 
 			}// parent Switch Menu
 

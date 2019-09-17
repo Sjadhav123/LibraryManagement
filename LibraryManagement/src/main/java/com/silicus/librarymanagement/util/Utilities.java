@@ -42,6 +42,11 @@ public class Utilities {
 			else if(inputPath.equals("bookIssue")){
 				return prop.getProperty("bookIssueRecordsFilePath");
 			}
+			else if(inputPath.equals("user"))
+			{
+				return prop.getProperty("userFilePath");
+				
+			}
 
 			return null;
 		}
